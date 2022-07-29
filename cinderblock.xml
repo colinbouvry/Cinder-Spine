@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+<block
+	name="Cinder-Spine"
+	id="org.libcinder.spine"
+	author="Cinder Project, Colin Bouvry"
+	license="BSD"
+	summary="Implents the Spine cpp runtime spec. For full reference, go to https://github.com/EsotericSoftware/spine-runtimes/."
+	core="true"
+	>
+	<requires>org.libcinder.spine</requires>
+	<sourcePattern>src/spine-cpp/src/spine/*.cpp</sourcePattern>
+	<headerPattern>src/spine-cpp/include/spine/*.h</headerPattern>
+	<sourcePattern>src/spine/*.cpp</sourcePattern>
+	<headerPattern>src/spine/*.h</headerPattern>
+	<includePath>src</includePath>
+</block>
+</cinder>

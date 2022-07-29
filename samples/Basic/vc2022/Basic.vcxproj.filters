@@ -1,0 +1,508 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{C55CA707-301D-472B-9AEE-71C9003EDC25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine">
+      <UniqueIdentifier>{2B6346C8-B70B-4BE6-B94A-5E2846DAFCE6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src">
+      <UniqueIdentifier>{CF33A16C-DD25-4384-B4C3-C86E21F80008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine-cpp">
+      <UniqueIdentifier>{19C914A2-C1DF-4F7A-BD34-B60803ACCEE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine-cpp\src">
+      <UniqueIdentifier>{1F2BC24A-146C-4823-839B-B55E4E439ADF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine-cpp\src\spine">
+      <UniqueIdentifier>{32611419-67E2-4B6B-A432-7CE9061032AA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine-cpp\include">
+      <UniqueIdentifier>{A53B7948-3C9C-4B88-8193-4C6AD93A532C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine-cpp\include\spine">
+      <UniqueIdentifier>{BEE4EA5B-44BA-4450-8F25-3A4F726457A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-Spine\src\spine">
+      <UniqueIdentifier>{6e8ed7e2-d50f-450d-b471-a128a67dcabe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\BasicApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BasicApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Animation.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\AnimationState.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\AnimationStateData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Atlas.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\AtlasAttachmentLoader.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Attachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\AttachmentLoader.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\AttachmentTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Bone.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\BoneData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\BoundingBoxAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\ClippingAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\ColorTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\ConstraintData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\CurveTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\DeformTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\DrawOrderTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Event.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\EventData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\EventTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Extension.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\IkConstraint.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\IkConstraintData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\IkConstraintTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Json.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\LinkedMesh.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Log.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\MathUtil.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\MeshAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathConstraint.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathConstraintData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathConstraintMixTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathConstraintPositionTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PathConstraintSpacingTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\PointAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\RegionAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\RotateTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\RTTI.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\ScaleTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Sequence.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SequenceTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\ShearTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Skeleton.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SkeletonBinary.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SkeletonBounds.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SkeletonClipping.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SkeletonData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SkeletonJson.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Skin.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Slot.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SlotData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\SpineObject.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\TextureLoader.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Timeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\TransformConstraint.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\TransformConstraintData.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\TransformConstraintTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\TranslateTimeline.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Triangulator.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\Updatable.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\spine-cpp\src\spine\VertexAttachment.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\src\spine</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Animation.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AnimationState.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AnimationStateData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Atlas.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AtlasAttachmentLoader.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Attachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AttachmentLoader.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AttachmentTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\AttachmentType.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\BlendMode.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Bone.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\BoneData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\BoundingBoxAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ClippingAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Color.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ColorTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ConstraintData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ContainerUtil.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\CurveTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Debug.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\DeformTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\dll.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\DrawOrderTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Event.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\EventData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\EventTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Extension.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\HashMap.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\HasRendererObject.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\IkConstraint.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\IkConstraintData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\IkConstraintTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Json.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\LinkedMesh.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Log.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\MathUtil.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\MeshAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\MixBlend.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\MixDirection.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathConstraint.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathConstraintData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathConstraintMixTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathConstraintPositionTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PathConstraintSpacingTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PointAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Pool.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\PositionMode.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Property.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\RegionAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\RotateMode.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\RotateTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\RTTI.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ScaleTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Sequence.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SequenceTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\ShearTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Skeleton.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SkeletonBinary.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SkeletonBounds.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SkeletonClipping.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SkeletonData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SkeletonJson.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Skin.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Slot.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SlotData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SpacingMode.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\spine.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SpineObject.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\SpineString.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TextureLoader.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TextureRegion.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Timeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TransformConstraint.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TransformConstraintData.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TransformConstraintTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TransformMode.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\TranslateTimeline.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Triangulator.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Updatable.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Vector.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Version.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\VertexAttachment.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine-cpp\include\spine\Vertices.h">
+      <Filter>Blocks\Cinder-Spine\src\spine-cpp\include\spine</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\spine\spine-cinder.cpp">
+      <Filter>Blocks\Cinder-Spine\src\spine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\spine\spine-cinder.h">
+      <Filter>Blocks\Cinder-Spine\src\spine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

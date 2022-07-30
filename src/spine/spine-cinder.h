@@ -39,21 +39,6 @@
 
 namespace spine {
 
-	// A single vertex with UV
-	struct Vertex {
-	public :
-		Vertex() {}
-		// Position in x/y plane
-		float x, y, z;
-
-		// UV coordinates
-		float u, v;
-
-		// Color, each channel in the range from 0-1
-		// (Should really be a 32-bit RGBA packed color)
-		ci::ColorA color;
-	};
-
 	/*
 	enum BlendMode {
 		// See http://esotericsoftware.com/git/spine-runtimes/blob/spine-libgdx/spine-libgdx/src/com/esotericsoftware/spine/BlendMode.java#L37

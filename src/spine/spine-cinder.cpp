@@ -48,6 +48,7 @@ namespace spine {
         , clipper()
         , state(nullptr)
         , skeleton(nullptr)
+        , usePremultipliedAlpha(false)
     {
         Bone::setYDown(true);
         worldVertices.ensureCapacity(SPINE_MESH_VERTEX_COUNT_MAX);
@@ -75,7 +76,6 @@ namespace spine {
 
     void SkeletonDrawable::update(float deltaTime) {
         if (state && skeleton) {
-            //skeleton->update(deltaTime);
             state->update(deltaTime * timeScale);
             state->apply(*skeleton);
             skeleton->updateWorldTransform();
@@ -137,7 +137,7 @@ namespace spine {
                 // Our engine specific Texture is stored in the AtlasRegion which was
                 // assigned to the attachment on load. It represents the texture atlas
                 // page that contains the image the region attachment is mapped to.
-                texture = *(gl::TextureRef*)((AtlasRegion*)regionAttachment->getRendererObject())->page->getRendererObject();
+                texture = *reinterpret_cast<gl::TextureRef*>(((AtlasRegion*)regionAttachment->getRendererObject())->page->getRendererObject());
 
                 // Ensure there is enough room for vertices
                 worldVertices.setSize(8, 0);
@@ -166,7 +166,7 @@ namespace spine {
                 // Our engine specific Texture is stored in the AtlasRegion which was
                 // assigned to the attachment on load. It represents the texture atlas
                 // page that contains the image the region attachment is mapped to.
-                texture = *(gl::TextureRef*)((AtlasRegion*)mesh->getRendererObject())->page->getRendererObject();
+                texture = *reinterpret_cast<gl::TextureRef*>(((AtlasRegion*)mesh->getRendererObject())->page->getRendererObject());
 
                 // Computed the world vertices positions for the vertices that make up
                 // the mesh attachment. This assumes the world transform of the
@@ -174,15 +174,12 @@ namespace spine {
                 // before rendering via Skeleton::updateWorldTransform(). The vertex positions will
                 // be written directly into the vertices array, with a stride of sizeof(Vertex)
                 size_t numVertices = mesh->getWorldVerticesLength() / 2;
-                mesh->computeWorldVertices(*slot, 0, mesh->getWorldVerticesLength(), worldVertices, 0, 2);
+                mesh->computeWorldVertices(*slot, 0, mesh->getWorldVerticesLength(), worldVertices.buffer(), 0, 2);
 
                 verticesCount = mesh->getWorldVerticesLength() >> 1;
                 uvs = &mesh->getUVs();
                 indices = &mesh->getTriangles();
                 indicesCount = mesh->getTriangles().size();
-
-                // set the indices, 2 triangles forming a quad
-                indices = &quadIndices;
             }
 
             if (clipper.isClipping()) {
@@ -196,43 +193,34 @@ namespace spine {
 
             glm::ivec2 size = texture->getSize();
 
-
-            std::vector<Vertex> vertexArray;
-            for (int ii = 0; ii < indicesCount; ++ii) {
-                Vertex vertex;
-                int index = (*indices)[ii] << 1;
-                vertex.x = (*vertices)[index];
-                vertex.y = (*vertices)[index + 1];
-                vertex.z = 0;
-                vertex.u = (*uvs)[index] * size.x;
-                vertex.v = (*uvs)[index + 1] * size.y;
-                vertex.color = ci::ColorA::white();
-                vertexArray.push_back(std::move(vertex));
+            auto vboMesh = TriMesh(
+                TriMesh::Format()
+                .positions()
+                .texCoords0()
+                .colors(3)
+            );
+            for (uint32_t ii = 0; ii < indicesCount; ++ii) {
+                uint32_t index = (*indices)[ii] << 1;
+                vboMesh.appendPosition(vec3((*vertices)[index], (*vertices)[index + 1], 0.f));
+                vboMesh.appendTexCoord(vec2((*uvs)[index], 1.f - (*uvs)[index + 1]));
+                vboMesh.appendColorRgb(ci::Color::white());
             }
+
             clipper.clipEnd();
-
-            vector<gl::VboMesh::Layout> bufferLayout = {
-                gl::VboMesh::Layout().usage(GL_DYNAMIC_DRAW).attrib(geom::Attrib::POSITION, 3),
-                gl::VboMesh::Layout().usage(GL_DYNAMIC_DRAW).attrib(geom::Attrib::TEX_COORD_0, 2),
-                gl::VboMesh::Layout().usage(GL_DYNAMIC_DRAW).attrib(geom::Attrib::COLOR, 4)
-            };
-
-            gl::VboRef vbo = gl::Vbo::create(GL_ARRAY_BUFFER, vertexArray, GL_STREAM_DRAW);
-            ci::geom::Plane plane = ci::geom::Plane().size(ci::vec2(1)).normal(ci::vec3(0, 0, 1));
-
-            auto vboMesh = ci::gl::VboMesh::create(plane, bufferLayout);
 
             // Draw the mesh we created for the attachment
             gl::ScopedGlslProg glslScope(gl::getStockShader(gl::ShaderDef().texture()));
             gl::ScopedTextureBind texScope(texture);
+            gl::pushModelView();
             gl::draw(vboMesh);
+            gl::popModelView();
         }
     }
 	void CINDERTextureLoader::load(AtlasPage &page, const String &path) {
 
-		gl::TextureRef texture;
+		gl::TextureRef* texture;
 		try {
-			texture = gl::Texture::create(loadImage(loadFile(path.buffer())));
+			texture = new gl::TextureRef(gl::Texture::create(loadImage(loadFile(path.buffer()))));
 		}
 		catch (Exception& exc) {
 			CI_LOG_EXCEPTION("failed to load image: " << path.buffer(), exc);
@@ -242,14 +230,14 @@ namespace spine {
 		//if (page.magFilter == TextureFilter_Linear) texture->setSmooth(true);
 		//if (page.uWrap == TextureWrap_Repeat && page.vWrap == TextureWrap_Repeat) texture->setRepeated(true);
 
-		page.setRendererObject(&texture);
-		glm::ivec2 size = texture->getSize();
+		page.setRendererObject(texture);
+		glm::ivec2 size = (*texture)->getSize();
 		page.width = size.x;
 		page.height = size.y;
 	}
 
 	void CINDERTextureLoader::unload(void *texture) {
-		//delete (Texture *) texture;
+		delete (gl::TextureRef*) texture;
 	}
 
 	SpineExtension *getDefaultExtension() {

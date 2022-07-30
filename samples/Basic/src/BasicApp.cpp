@@ -27,12 +27,12 @@
  * THE SPINE RUNTIMES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 /*
- Copyright (c) 2010, Hector Sanchez-Pajares
- Aer Studio http://www.aerstudio.com
+ Copyright (c) 2022, Colin BOUVRY
+ Aer Studio http://www.colinbouvry.com
  All rights reserved.
  
  
- This is a block for TUIO Integration for the Cinder framework (http://libcinder.org)
+ This is a block for Spine Integration for the Cinder framework (http://libcinder.org)
  
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that
  the following conditions are met:
@@ -80,27 +80,43 @@ class BasicApp : public App {
 	static void callback(AnimationState* state, EventType type, TrackEntry* entry, spine::Event* event);
 	static shared_ptr<SkeletonData> readSkeletonJsonData(const String& filename, Atlas* atlas, float scale);
 	static shared_ptr<SkeletonData> readSkeletonBinaryData(const char* filename, Atlas* atlas, float scale);
-	static void testcase(void func(SkeletonData* skeletonData, Atlas* atlas),
-		const char* jsonName, const char* binaryName, const char* atlasName,
-		float scale);
-	static void setupRaptor(SkeletonData* skeletonData, Atlas* atlas);
-	static int testcases();
-	static void test(SkeletonData* skeletonData, Atlas* atlas);
-	private:
-		static SkeletonDrawable* mDrawable;
-		DebugExtension* dbgExtension;
+private:
+	SkeletonDrawable* mDrawable;
+	DebugExtension* dbgExtension;
+	CINDERTextureLoader textureLoader;
+	spine::Atlas* atlas;
+	spine::SkeletonData* skeletonData;
 };
-
-SkeletonDrawable* BasicApp::mDrawable = nullptr;
 
 void BasicApp::setup()
 {
-		dbgExtension = new DebugExtension(SpineExtension::getInstance());
+	dbgExtension = new DebugExtension(SpineExtension::getInstance());
 
-		SpineExtension::setInstance(dbgExtension);
+	SpineExtension::setInstance(dbgExtension);
 
-		testcase(BasicApp::setupRaptor, ci::app::getAssetPath("raptor-pro.json").string().c_str(), ci::app::getAssetPath("raptor-pro.skel").string().c_str(), ci::app::getAssetPath("raptor-pma.atlas").string().c_str(), 0.5f);
-		//testcase(BasicApp::setupRaptor, ci::app::getAssetPath("goblins-pro.json").string().c_str(), ci::app::getAssetPath("goblins-pro.skel").string().c_str(), ci::app::getAssetPath("goblins-pma.atlas").string().c_str(), 1.4f);
+	string jsonName = ci::app::getAssetPath("raptor-pro.json").string();
+	string atlasName = ci::app::getAssetPath("raptor-pma.atlas").string();
+	float scale = 0.5f;
+
+	atlas = new (__FILE__, __LINE__) Atlas(atlasName.c_str(), &textureLoader);
+	assert(atlas);
+
+	SkeletonJson json(atlas);
+	skeletonData = json.readSkeletonDataFile(jsonName.c_str());
+	assert(skeletonData);
+
+	mDrawable = new SkeletonDrawable(skeletonData);
+	mDrawable->timeScale = 1;
+	mDrawable->setUsePremultipliedAlpha(true);
+
+	Skeleton* skeleton = mDrawable->skeleton;
+	skeleton->setPosition(800, 1000);
+	skeleton->updateWorldTransform();
+
+	mDrawable->state->setAnimation(0, "walk", true);
+	//mDrawable->state->addAnimation(1, "gun-grab", false, 2);
+
+	mDrawable->update(0.f);
 }
 
 BasicApp::~BasicApp()
@@ -116,6 +132,7 @@ void BasicApp::draw()
 	gl::setMatricesWindow( getWindowSize() );
 	
 	gl::ScopedColor color(ci::Color::white());
+	
 	if(mDrawable)
 		mDrawable->draw();
 }
@@ -126,10 +143,6 @@ void BasicApp::update()
 		mDrawable->update(1/60.f);
 }
 
-template<typename T, typename... Args>
-unique_ptr<T> make_unique_test(Args &&...args) {
-	return unique_ptr<T>(new T(forward<Args>(args)...));
-}
 
 void BasicApp::callback(AnimationState *state, EventType type, TrackEntry *entry, spine::Event *event) {
 	SP_UNUSED(state);
@@ -180,71 +193,5 @@ shared_ptr<SkeletonData> BasicApp::readSkeletonBinaryData(const char *filename, 
 	}
 	return shared_ptr<SkeletonData>(skeletonData);
 }
-
-void BasicApp::testcase(void func(SkeletonData *skeletonData, Atlas *atlas),
-			  const char *jsonName, const char *binaryName, const char *atlasName,
-			  float scale) {
-	SP_UNUSED(jsonName);
-	CINDERTextureLoader textureLoader;
-	auto atlas = make_unique_test<Atlas>(atlasName, &textureLoader);
-	if (atlas->getPages().size() == 0) {
-		printf("Failed to load atlas");
-		std::exit(0);
-	}
-
-	auto skeletonData = readSkeletonJsonData(jsonName, atlas.get(), scale);
-	func(skeletonData.get(), atlas.get());//
-	if (!skeletonData) {
-		printf("Failed to load skeleton data");
-		std::exit(0);
-	}
-
-	/*
-	skeletonData = readSkeletonBinaryData(binaryName, atlas.get(), scale);
-	func(skeletonData.get(), atlas.get());
-	if (!skeletonData) {
-		printf("Failed to load skeleton data");
-		std::exit(0);
-	}*/
-}
-
-void BasicApp::setupRaptor(SkeletonData *skeletonData, Atlas *atlas) {
-	SP_UNUSED(atlas);
-
-	mDrawable = new SkeletonDrawable(skeletonData);
-	mDrawable->timeScale = 1;
-	mDrawable->setUsePremultipliedAlpha(true);
-
-	Skeleton *skeleton = mDrawable->skeleton;
-	skeleton->setPosition(320, 590);
-	skeleton->updateWorldTransform();
-
-	mDrawable->state->setAnimation(0, "walk", true);
-	//mDrawable->state->addAnimation(1, "gun-grab", false, 2);
-}
-
-
-/**
- * Used for debugging purposes during runtime development
- */
-void BasicApp::test(SkeletonData *skeletonData, Atlas *atlas) {
-	SP_UNUSED(atlas);
-
-	Skeleton skeleton(skeletonData);
-	AnimationStateData animationStateData(skeletonData);
-	AnimationState animationState(&animationStateData);
-	animationState.setAnimation(0, "idle", true);
-
-	float d = 3;
-	for (int i = 0; i < 1; i++) {
-		animationState.update(d);
-		animationState.apply(skeleton);
-		skeleton.updateWorldTransform();
-		d += 0.1f;
-	}
-}
-
-
-
 
 CINDER_APP( BasicApp, RendererGl )

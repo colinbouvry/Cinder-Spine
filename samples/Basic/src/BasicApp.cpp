@@ -76,6 +76,7 @@ class BasicApp : public App {
 	void setup() override;
 	void draw() override;
 	void update() override;
+	void keyDown(KeyEvent event) override;
 	~BasicApp();
 	static void callback(AnimationState* state, EventType type, TrackEntry* entry, spine::Event* event);
 	static shared_ptr<SkeletonData> readSkeletonJsonData(const String& filename, Atlas* atlas, float scale);
@@ -114,7 +115,7 @@ void BasicApp::setup()
 	skeleton->updateWorldTransform();
 
 	mDrawable->state->setAnimation(0, "walk", true);
-	//mDrawable->state->addAnimation(1, "gun-grab", false, 2);
+	mDrawable->state->addAnimation(1, "gun-grab", false, 2);
 
 	mDrawable->update(0.f);
 }
@@ -192,6 +193,29 @@ shared_ptr<SkeletonData> BasicApp::readSkeletonBinaryData(const char *filename, 
 		std::exit(0);
 	}
 	return shared_ptr<SkeletonData>(skeletonData);
+}
+
+void BasicApp::keyDown(KeyEvent event)
+{
+	switch (event.getCode())
+	{
+	case KeyEvent::KEY_ESCAPE:
+		// quit the application
+		quit();
+		return;
+	case KeyEvent::KEY_f:
+		setFullScreen(!isFullScreen());
+		break;
+	case KeyEvent::KEY_SPACE:
+		mDrawable->state->addAnimation(2, "jump", false, 0);
+		break;
+	case KeyEvent::KEY_g:
+		mDrawable->state->addAnimation(2, "gun-holster", false, 0);
+		break;
+	case KeyEvent::KEY_r:
+		mDrawable->state->addAnimation(2, "roar", false, 0);
+		break;
+	}
 }
 
 CINDER_APP( BasicApp, RendererGl )

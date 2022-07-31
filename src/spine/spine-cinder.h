@@ -68,7 +68,7 @@ namespace cinder {
 			ctx->blendFunc(states.blendMode.src, states.blendMode.dst);
 
 			// Draw the mesh we created for the attachment
-			gl::ScopedGlslProg glslScope(gl::getStockShader(gl::ShaderDef().texture()));
+			gl::ScopedGlslProg glslScope(gl::getStockShader(gl::ShaderDef().texture().color()));
 			gl::ScopedTextureBind texScope(states.texture);
 			gl::pushModelView();
 			gl::draw(mesh);

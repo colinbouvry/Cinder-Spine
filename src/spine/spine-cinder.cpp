@@ -114,14 +114,6 @@ namespace spine {
             Attachment* attachment = slot->getAttachment();
             if (!attachment) continue;
 
-            // Calculate the tinting color based on the skeleton's color
-            // and the slot's color. Each color channel is given in the
-            // range [0-1], you may have to multiply by 255 and cast to
-            // and int if your engine uses integer ranges for color channels.
-            Color skeletonColor = skeleton->getColor();
-            Color slotColor = slot->getColor();
-            Color tint(skeletonColor.r * slotColor.r, skeletonColor.g * slotColor.g, skeletonColor.b * slotColor.b, skeletonColor.a * slotColor.a);
-
             // Fill the vertices array, indices, and texture depending on the type of attachment
             Vector<float>* vertices = &worldVertices;
             int verticesCount = 0;

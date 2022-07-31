@@ -39,6 +39,15 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
+ci::BlendMode normal = ci::BlendMode(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ci::BlendMode additive = ci::BlendMode(GL_SRC_ALPHA, GL_ONE);
+ci::BlendMode multiply = ci::BlendMode(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+ci::BlendMode screen = ci::BlendMode(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+
+ci::BlendMode normalPma = ci::BlendMode(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+ci::BlendMode additivePma = ci::BlendMode(GL_ONE, GL_ONE);
+ci::BlendMode multiplyPma = ci::BlendMode(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+ci::BlendMode screenPma = ci::BlendMode(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
 namespace spine {
 
@@ -49,6 +58,7 @@ namespace spine {
         , state(nullptr)
         , skeleton(nullptr)
         , usePremultipliedAlpha(false)
+        , Drawable()
     {
         Bone::setYDown(true);
         worldVertices.ensureCapacity(SPINE_MESH_VERTEX_COUNT_MAX);
@@ -82,7 +92,18 @@ namespace spine {
         }
     }
 
-    void SkeletonDrawable::draw(){
+    void SkeletonDrawable::draw(RenderTarget& target, RenderStates& states){
+
+        // Clear
+        vboMesh.clear();
+        // Texture
+        gl::TextureRef texture = nullptr;
+        states.texture = nullptr;
+
+        // Early out if skeleton is invisible
+        if (skeleton->getColor().a == 0) return;
+
+
         // For each slot in the draw order array of the skeleton
         for (size_t i = 0, n = skeleton->getSlots().size(); i < n; ++i) {
             Slot* slot = skeleton->getDrawOrder()[i];
@@ -93,25 +114,6 @@ namespace spine {
             Attachment* attachment = slot->getAttachment();
             if (!attachment) continue;
 
-            // Fetch the blend mode from the slot and
-            // translate it to the engine blend mode
-            switch (slot->getData().getBlendMode()) {
-            case BlendMode_Normal:
-                gl::enableAlphaBlending();
-                break;
-            case BlendMode_Additive:
-                gl::enableAdditiveBlending();
-                break;
-            case BlendMode_Multiply:
-                break;
-            case BlendMode_Screen:
-                break;
-            default:
-                // unknown Spine blend mode, fall back to
-                // normal blend mode
-                gl::enableAlphaBlending();
-            }
-
             // Calculate the tinting color based on the skeleton's color
             // and the slot's color. Each color channel is given in the
             // range [0-1], you may have to multiply by 255 and cast to
@@ -121,7 +123,6 @@ namespace spine {
             Color tint(skeletonColor.r * slotColor.r, skeletonColor.g * slotColor.g, skeletonColor.b * slotColor.b, skeletonColor.a * slotColor.a);
 
             // Fill the vertices array, indices, and texture depending on the type of attachment
-            gl::TextureRef texture = nullptr;
             Vector<float>* vertices = &worldVertices;
             int verticesCount = 0;
             Vector<float>* uvs = NULL;
@@ -133,6 +134,13 @@ namespace spine {
                 // Cast to an spRegionAttachment so we can get the rendererObject
                 // and compute the world vertices
                 RegionAttachment* regionAttachment = (RegionAttachment*)attachment;
+                attachmentColor = &regionAttachment->getColor();
+
+                // Early out if the slot color is 0
+                if (attachmentColor->a == 0) {
+                    clipper.clipEnd(*slot);
+                    continue;
+                }
 
                 // Our engine specific Texture is stored in the AtlasRegion which was
                 // assigned to the attachment on load. It represents the texture atlas
@@ -159,6 +167,13 @@ namespace spine {
                 // Cast to an MeshAttachment so we can get the rendererObject
                 // and compute the world vertices
                 MeshAttachment* mesh = (MeshAttachment*)attachment;
+                attachmentColor = &mesh->getColor();
+
+                // Early out if the slot color is 0
+                if (attachmentColor->a == 0) {
+                    clipper.clipEnd(*slot);
+                    continue;
+                }
 
                 // Ensure there is enough room for vertices
                 worldVertices.setSize(mesh->getWorldVerticesLength(), 0);
@@ -181,6 +196,60 @@ namespace spine {
                 indices = &mesh->getTriangles();
                 indicesCount = mesh->getTriangles().size();
             }
+            else if (attachment->getRTTI().isExactly(ClippingAttachment::rtti)) {
+                ClippingAttachment* clip = (ClippingAttachment*)slot->getAttachment();
+                clipper.clipStart(*slot, clip);
+                continue;
+            }
+            else
+                continue;
+
+            ci::BlendMode blend;
+            if (!usePremultipliedAlpha) {
+                switch (slot->getData().getBlendMode()) {
+                case BlendMode_Normal:
+                    blend = normal;
+                    break;
+                case BlendMode_Additive:
+                    blend = additive;
+                    break;
+                case BlendMode_Multiply:
+                    blend = multiply;
+                    break;
+                case BlendMode_Screen:
+                    blend = screen;
+                    break;
+                default:
+                    blend = normal;
+                }
+            }
+            else {
+                switch (slot->getData().getBlendMode()) {
+                case BlendMode_Normal:
+                    blend = normalPma;
+                    break;
+                case BlendMode_Additive:
+                    blend = additivePma;
+                    break;
+                case BlendMode_Multiply:
+                    blend = multiplyPma;
+                    break;
+                case BlendMode_Screen:
+                    blend = screenPma;
+                    break;
+                default:
+                    blend = normalPma;
+                }
+            }
+
+            if (states.texture == 0) states.texture = texture;
+
+            if (states.blendMode.src != blend.src || states.blendMode.dst != blend.dst || states.texture != texture) {
+                target.draw(vboMesh, states);
+                vboMesh.clear();
+                states.blendMode = blend;
+                states.texture = texture;
+            }
 
             if (clipper.isClipping()) {
                 clipper.clipTriangles(worldVertices, *indices, *uvs, 2);
@@ -192,29 +261,23 @@ namespace spine {
             }
 
             glm::ivec2 size = texture->getSize();
+            uint8_t r = static_cast<uint8_t>(skeleton->getColor().r * slot->getColor().r * attachmentColor->r * 255);
+            uint8_t g = static_cast<uint8_t>(skeleton->getColor().g * slot->getColor().g * attachmentColor->g * 255);
+            uint8_t b = static_cast<uint8_t>(skeleton->getColor().b * slot->getColor().b * attachmentColor->b * 255);
+            uint8_t a = static_cast<uint8_t>(skeleton->getColor().a * slot->getColor().a * attachmentColor->a * 255);
 
-            auto vboMesh = TriMesh(
-                TriMesh::Format()
-                .positions()
-                .texCoords0()
-                .colors(3)
-            );
             for (uint32_t ii = 0; ii < indicesCount; ++ii) {
                 uint32_t index = (*indices)[ii] << 1;
                 vboMesh.appendPosition(vec3((*vertices)[index], (*vertices)[index + 1], 0.f));
                 vboMesh.appendTexCoord(vec2((*uvs)[index], 1.f - (*uvs)[index + 1]));
-                vboMesh.appendColorRgb(ci::Color::white());
+                vboMesh.appendColorRgba(ci::ColorA(r, g, b, a));
             }
 
-            clipper.clipEnd();
-
-            // Draw the mesh we created for the attachment
-            gl::ScopedGlslProg glslScope(gl::getStockShader(gl::ShaderDef().texture()));
-            gl::ScopedTextureBind texScope(texture);
-            gl::pushModelView();
-            gl::draw(vboMesh);
-            gl::popModelView();
+            clipper.clipEnd(*slot);
         }
+        target.draw(vboMesh, states);
+
+        clipper.clipEnd();
     }
 	void CINDERTextureLoader::load(AtlasPage &page, const String &path) {
 
@@ -227,8 +290,11 @@ namespace spine {
 			return;
 		}
 
-		//if (page.magFilter == TextureFilter_Linear) texture->setSmooth(true);
-		//if (page.uWrap == TextureWrap_Repeat && page.vWrap == TextureWrap_Repeat) texture->setRepeated(true);
+        if (page.magFilter == TextureFilter_Linear)
+            texture->get()->setMagFilter(GL_LINEAR);
+
+        if (page.uWrap == TextureWrap_Repeat && page.vWrap == TextureWrap_Repeat)
+            texture->get()->setWrap(GL_REPEAT, GL_REPEAT);
 
 		page.setRendererObject(texture);
 		glm::ivec2 size = (*texture)->getSize();

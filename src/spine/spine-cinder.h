@@ -37,28 +37,70 @@
 #include <spine/spine.h>
 
 
-namespace spine {
+namespace cinder {
 
-	/*
-	enum BlendMode {
+	class BlendMode {
 		// See http://esotericsoftware.com/git/spine-runtimes/blob/spine-libgdx/spine-libgdx/src/com/esotericsoftware/spine/BlendMode.java#L37
 		// for how these translate to OpenGL source/destination blend modes.
-		BLEND_NORMAL,
-		BLEND_ADDITIVE,
-		BLEND_MULTIPLY,
-		BLEND_SCREEN,
-	};
-	*/
+	public:
+		BlendMode() {}
+		BlendMode(GLenum s, GLenum d)
+			: src(s)
+			, dst(d) {
 
-	class SkeletonDrawable {
+		}
+		GLenum src;
+		GLenum dst;
+	};
+
+	class RenderStates {
+	public:
+		RenderStates() {}
+		BlendMode blendMode;
+		ci::gl::TextureRef texture;
+	};
+
+	class RenderTarget {
+	public:
+		void draw(ci::TriMesh& mesh, RenderStates& states) {
+			auto ctx = gl::context();
+			ctx->enable(GL_BLEND);
+			ctx->blendFunc(states.blendMode.src, states.blendMode.dst);
+
+			// Draw the mesh we created for the attachment
+			gl::ScopedGlslProg glslScope(gl::getStockShader(gl::ShaderDef().texture()));
+			gl::ScopedTextureBind texScope(states.texture);
+			gl::pushModelView();
+			gl::draw(mesh);
+			gl::popModelView();
+		}
+	};
+
+	class Drawable {
+	public:
+		Drawable() {}
+		virtual ~Drawable() {}
+		virtual void update(float deltaTime) = 0;
+		virtual void draw() {
+			draw(renderTarget, states);
+		}
+		virtual void draw(cinder::RenderTarget& target, cinder::RenderStates& states) = 0;
+		cinder::RenderStates states;
+		cinder::RenderTarget renderTarget;
+	};
+} /* namespace cinder */
+
+namespace spine {
+
+	class SkeletonDrawable : public cinder::Drawable {
 	public:
 		SkeletonDrawable(SkeletonData* skeletonData, AnimationStateData* stateData = 0);
 
-		~SkeletonDrawable();
+		virtual ~SkeletonDrawable();
 
-		void update(float deltaTime);
+		virtual void update(float deltaTime);
 
-		void draw();
+		virtual void draw(cinder::RenderTarget& target, cinder::RenderStates& states);
 
 		void setUsePremultipliedAlpha(bool usePMA) { usePremultipliedAlpha = usePMA; };
 
@@ -68,7 +110,15 @@ namespace spine {
 		AnimationState* state;
 		float timeScale;
 
-	private:
+		// Mesh
+		ci::TriMesh vboMesh = ci::TriMesh(
+			ci::TriMesh::Format()
+			.positions()
+			.texCoords0()
+			.colors(4)
+		);
+
+	protected:
 		bool ownsAnimationStateData;
 		Vector<float> worldVertices;
 		Vector<unsigned short> quadIndices;
@@ -81,8 +131,6 @@ namespace spine {
 		virtual void load(AtlasPage &page, const String &path);
 
 		virtual void unload(void *texture);
-
-		String toString() const;
 	};
 
 } /* namespace spine */

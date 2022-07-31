@@ -81,7 +81,7 @@ class BasicApp : public App {
 	static void callback(AnimationState* state, EventType type, TrackEntry* entry, spine::Event* event);
 	static shared_ptr<SkeletonData> readSkeletonJsonData(const String& filename, Atlas* atlas, float scale);
 	static shared_ptr<SkeletonData> readSkeletonBinaryData(const char* filename, Atlas* atlas, float scale);
-private:
+protected:
 	SkeletonDrawable* mDrawable;
 	DebugExtension* dbgExtension;
 	CINDERTextureLoader textureLoader;
@@ -115,7 +115,7 @@ void BasicApp::setup()
 	skeleton->updateWorldTransform();
 
 	mDrawable->state->setAnimation(0, "walk", true);
-	mDrawable->state->addAnimation(1, "gun-grab", false, 2);
+	mDrawable->state->addAnimation(1, "gun-grab", false,2);
 
 	mDrawable->update(0.f);
 }
@@ -135,7 +135,7 @@ void BasicApp::draw()
 	gl::ScopedColor color(ci::Color::white());
 	
 	if(mDrawable)
-		mDrawable->draw();
+		mDrawable->Drawable::draw();
 }
 
 void BasicApp::update()
@@ -206,14 +206,17 @@ void BasicApp::keyDown(KeyEvent event)
 	case KeyEvent::KEY_f:
 		setFullScreen(!isFullScreen());
 		break;
+	case KeyEvent::KEY_w:
+		mDrawable->state->setAnimation(0, "walk", true);
+		break;
 	case KeyEvent::KEY_SPACE:
-		mDrawable->state->addAnimation(2, "jump", false, 0);
+		mDrawable->state->setAnimation(0, "jump", false);
 		break;
 	case KeyEvent::KEY_g:
-		mDrawable->state->addAnimation(2, "gun-holster", false, 0);
+		mDrawable->state->setAnimation(0, "gun-holster", false);
 		break;
 	case KeyEvent::KEY_r:
-		mDrawable->state->addAnimation(2, "roar", false, 0);
+		mDrawable->state->setAnimation(0, "roar", false);
 		break;
 	}
 }

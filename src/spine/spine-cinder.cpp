@@ -253,16 +253,16 @@ namespace spine {
             }
 
             glm::ivec2 size = texture->getSize();
-            uint8_t r = static_cast<uint8_t>(skeleton->getColor().r * slot->getColor().r * attachmentColor->r);
-            uint8_t g = static_cast<uint8_t>(skeleton->getColor().g * slot->getColor().g * attachmentColor->g);
-            uint8_t b = static_cast<uint8_t>(skeleton->getColor().b * slot->getColor().b * attachmentColor->b);
-            uint8_t a = static_cast<uint8_t>(skeleton->getColor().a * slot->getColor().a * attachmentColor->a);
+            uint8_t r = static_cast<uint8_t>(skeleton->getColor().r * slot->getColor().r * attachmentColor->r * 255.f);
+            uint8_t g = static_cast<uint8_t>(skeleton->getColor().g * slot->getColor().g * attachmentColor->g * 255.f);
+            uint8_t b = static_cast<uint8_t>(skeleton->getColor().b * slot->getColor().b * attachmentColor->b * 255.f);
+            uint8_t a = static_cast<uint8_t>(skeleton->getColor().a * slot->getColor().a * attachmentColor->a * 255.f);
 
             for (uint32_t ii = 0; ii < indicesCount; ++ii) {
                 uint32_t index = (*indices)[ii] << 1;
                 vboMesh.appendPosition(vec3((*vertices)[index], (*vertices)[index + 1], 0.f));
                 vboMesh.appendTexCoord(vec2((*uvs)[index], 1.f - (*uvs)[index + 1]));
-                vboMesh.appendColorRgba(ci::ColorA(r, g, b, a));
+                vboMesh.appendColorRgba(ci::ColorA(r, g, b, a)/255.f);
             }
 
             clipper.clipEnd(*slot);

@@ -223,12 +223,15 @@ void InteractionApp::mouseDown(MouseEvent event)
 		CI_LOG_I("hit " << name);
 		if (name == "play_boundingbox") {
 			mDrawable->state->setAnimation(1, "play", false);
+			mDrawable->state->addEmptyAnimation(1, 0.1, 0);
 		}
 		else if (name == "settings_boundingbox") {
 			mDrawable->state->setAnimation(1, "settings", false);
+			mDrawable->state->addEmptyAnimation(1, 0.1, 0);
 		}
 		else if (name == "quit_boundingbox") {
 			mDrawable->state->setAnimation(1, "quit", false);
+			mDrawable->state->addEmptyAnimation(1, 0.1, 0);
 		}
 	}
 }

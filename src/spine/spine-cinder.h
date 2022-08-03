@@ -107,6 +107,7 @@ namespace spine {
 		bool getUsePremultipliedAlpha() { return usePremultipliedAlpha; };
 
 		Skeleton* skeleton;
+		SkeletonBounds* bounds;
 		AnimationState* state;
 		float timeScale;
 

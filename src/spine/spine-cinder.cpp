@@ -64,6 +64,8 @@ namespace spine {
         worldVertices.ensureCapacity(SPINE_MESH_VERTEX_COUNT_MAX);
         skeleton = new (__FILE__, __LINE__) Skeleton(skeletonData);
 
+        bounds = new SkeletonBounds();
+
         ownsAnimationStateData = stateData == 0;
         if (ownsAnimationStateData) stateData = new (__FILE__, __LINE__) AnimationStateData(skeletonData);
 
@@ -89,6 +91,7 @@ namespace spine {
             state->update(deltaTime * timeScale);
             state->apply(*skeleton);
             skeleton->updateWorldTransform();
+            bounds->update(*skeleton, false);
         }
     }
 
